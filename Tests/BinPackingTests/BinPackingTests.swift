@@ -5,10 +5,52 @@ import XCTest
 @testable import BinPackingLib
 
 class BinPackingTest: XCTestCase {
-    func testSums() {
+    func testValidPackages() {
         let packages = [10, 5, 5, 2]
-        let bins = firstFit(packages: packages, capacity: 20 )
-        print(bins)
+        let bins = OneDimensionalPacking.firstFit(packages: packages, capacity: 20 )
         
+        assert(bins.sum() == packages.sum())
+        assert(bins == [20, 2])
+    }
+    
+    func testEmptyPackages() {
+        let packages: [Int] = []
+        let bins = OneDimensionalPacking.firstFit(packages: packages, capacity: 20 )
+        
+        assert(bins == [0])
+    }
+    
+    func testNegativePackages() {
+        let packages: [Int] = [10, 5, 5, -1]
+        let bins = OneDimensionalPacking.firstFit(packages: packages, capacity: 20 )
+        
+        assert(bins == [19])
+    }
+}
+
+class RandomSequenceTest: XCTestCase{
+    func testOnlyOnes(){
+        let n = 100
+        let result = randomElements(range: 1..<2, n: n)
+        assert(result.sum() == n)
+    }
+
+    func testRangeBelowZero(){
+        let n = 100
+        let result = randomElements(range: -2...0, n: n)
+        assert(result.sum() < 0)
+    }
+}
+
+
+class SumSequenceTest: XCTestCase{
+    func testSumPositive(){
+        let s = [1, 2, 3, 4, 5]
+        assert(s.sum() == 15)
+    }
+
+    func testSumNegative(){
+        let s = [-1, 2, 3, 4, 5]
+        assert(s.sum() == 13)
     }
 }

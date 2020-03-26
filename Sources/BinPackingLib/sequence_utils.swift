@@ -8,25 +8,35 @@
 import Foundation
 
 
-extension Sequence where Element: AdditiveArithmetic {
+public extension Sequence{
+    
+    func sum<T: AdditiveArithmetic>(with: (Element) -> T) -> T {
+        return reduce(T.zero, {a, b in a + with(b)})
+    }
+}
+
+public extension Sequence where Element: AdditiveArithmetic {
     func sum() -> Element { reduce(Element.zero, +) }
 }
 
-func randomElements(range: Range<Int>, n: Int) -> [Int]{
+public func unpack<T: AdditiveArithmetic>(a: Any, with: (Any) -> T) -> T{
+    return with(a)
+}
+public func randomElements(range: Range<Double>, n: Int) -> [Double]{
+    let closedRange = ClosedRange.init(uncheckedBounds: (range.lowerBound, range.upperBound))
+    return randomElements(range: closedRange, n: n)
+}
+public func randomElements(range: ClosedRange<Double>, n: Int) -> [Double]{
+    return (1...n).map {_ in Double.random(in: range)}
+}
+
+public func randomElements(range: Range<Int>, n: Int) -> [Int]{
     let closed_range = ClosedRange.init(range)
     return randomElements(range: closed_range, n: n)
 }
-func randomElements(range: ClosedRange<Int>, n: Int) -> [Int]{
+public func randomElements(range: ClosedRange<Int>, n: Int) -> [Int]{
     return (1...n).map {_ in Int.random(in: range)}
 }
 
 
-func randomElement(range: ClosedRange<Int>, n: Int) -> Int{
-    return Int.random(in: range)
-}
-
-func randomElement(range: Range<Int>, n: Int) -> Int {
-    let closed_range = ClosedRange.init(range)
-    return randomElement(range: closed_range, n: n)
-}
 
