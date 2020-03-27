@@ -2,12 +2,6 @@ import Commander
 import Foundation
 import BinPackingLib
 
-// The `in` seperates the arguments from the rest of the closure.
-// I guess in some ways this is equivalent to writing a function.
-// Maybe I should try that
-// Here's another example for a closure
-// let mappedNumbers = numbers.map({ number in 3 * number })
-// works like a lambda. duh! Beware tha the scope might be different from a lambda scope.
 
 let main = command(
     Option("capacity", default: 20),
@@ -18,7 +12,7 @@ let main = command(
 
 
 func binPacking(capacity: Int, numPackages: Int){
-    let packages = (randomElements(range: 1..<capacity, n: numPackages))
+    let packages = (1..<capacity).randomElements(n: numPackages)
     
     var bins = OneDimensionalPacking.firstFit(packages: packages, capacity: capacity )
     print("First-Fit bin packing needed \(bins.count) to pack \(numPackages) packages.")

@@ -31,13 +31,13 @@ class BinPackingTest: XCTestCase {
 class RandomSequenceTest: XCTestCase{
     func testOnlyOnes(){
         let n = 100
-        let result = randomElements(range: 1..<2, n: n)
+        let result = (1..<2).randomElements(n: n)
         assert(result.sum() == n)
     }
 
     func testRangeBelowZero(){
         let n = 100
-        let result = randomElements(range: -2...0, n: n)
+        let result = (-2...0).randomElements(n: n)
         assert(result.sum() < 0)
     }
 }
