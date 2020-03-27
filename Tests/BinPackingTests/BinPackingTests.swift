@@ -31,15 +31,31 @@ class BinPackingTest: XCTestCase {
 class RandomSequenceTest: XCTestCase{
     func testOnlyOnes(){
         let n = 100
-        let result = (1..<2).randomElements(n: n)
+        let result = (1..<2).randomElements(n: n)!
         assert(result.sum() == n)
+        assert(result.count == n)
     }
 
     func testRangeBelowZero(){
         let n = 100
-        let result = (-2...0).randomElements(n: n)
+        let result = (-2...0).randomElements(n: n)!
         assert(result.sum() < 0)
+        assert(result.count == n)
     }
+    
+    func testRandomCollection(){
+        let values = [1.0, 1.0, 1.0]
+        let result = values.randomElements(n: 2)!
+        assert(result.sum()  == 2.0)
+        assert(result.count == 2)
+    }
+    
+    func testRandomStringCollection(){
+        let values = ["Otto", "Hans", "Helge", "Herbert"]
+        let result = values.randomElements(n: 2)!
+        assert(result.count == 2)
+    }
+    
 }
 
 
@@ -53,4 +69,11 @@ class SumSequenceTest: XCTestCase{
         let s = [-1, 2, 3, 4, 5]
         assert(s.sum() == 13)
     }
+    
+    func testSumClosure(){
+        let elements = [(name:"a", value: 1), (name: "b", value: 2)]
+        let result = elements.sum(with: {el in el.value})
+        assert(result == 3)
+    }
+    
 }

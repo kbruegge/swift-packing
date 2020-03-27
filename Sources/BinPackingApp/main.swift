@@ -12,12 +12,12 @@ let main = command(
 
 
 func binPacking(capacity: Int, numPackages: Int){
-    let packages = (1..<capacity).randomElements(n: numPackages)
+    let packages = (1..<capacity).randomElements(n: numPackages)!
     
     var bins = OneDimensionalPacking.firstFit(packages: packages, capacity: capacity )
     print("First-Fit bin packing needed \(bins.count) to pack \(numPackages) packages.")
     print(bins)
-    
+       
     bins = OneDimensionalPacking.firstFitDecreasing(packages: packages, capacity: capacity )
     print("First-Fit-Decreasing bin packing needed \(bins.count) to pack \(numPackages) packages.")
     print(bins)

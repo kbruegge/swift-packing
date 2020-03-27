@@ -20,3 +20,8 @@ to make it work. I think its because I installed the Xcode commandline tools bef
 
 See https://en.wikipedia.org/wiki/Bin_packing_problem
 
+
+## Utilitie Functions
+
+
+The https://stackoverflow.com/questions/26319660/whats-the-best-practice-for-naming-swift-files-that-add-extensions-to-existing
